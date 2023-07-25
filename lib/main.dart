@@ -53,29 +53,39 @@ class _MyHomePageState extends State<MyHomePage> {
           title: const Text('T-shirt Shop'),
         ),
         // backgroundColor: Colors.blue,
-        body: Column(
-          children: [
-            Container(
-              color: Colors.green,
-            ),
-            Container(
-              color: Colors.red,
-              child: // Example pay button configured using a string
-                  ApplePayButton(
-                paymentConfiguration: PaymentConfiguration.fromJsonString(
-                    payment_configurations.defaultApplePay),
-                paymentItems: _paymentItems,
-                style: ApplePayButtonStyle.black,
-                type: ApplePayButtonType.buy,
-                margin: const EdgeInsets.only(top: 15.0),
-                onPaymentResult: onApplePayResult,
-                loadingIndicator: const Center(
-                  child: CircularProgressIndicator(),
+        body: Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          color: Colors.blue,
+          child: Column(
+            children: [
+              Container(
+                height: 200,
+                color: Colors.green,
+              ),
+              Container(
+                height: 200,
+                color: Colors.red,
+                child: // Example pay button configured using a string
+                    ApplePayButton(
+                  paymentConfiguration: PaymentConfiguration.fromJsonString(
+                      payment_configurations.defaultApplePay),
+                  paymentItems: _paymentItems,
+                  style: ApplePayButtonStyle.black,
+                  type: ApplePayButtonType.buy,
+                  margin: const EdgeInsets.only(top: 15.0),
+                  onPaymentResult: onApplePayResult,
+                  loadingIndicator: const Center(
+                    child: CircularProgressIndicator(),
+                  ),
                 ),
               ),
-            ),
-            Container(color: Colors.amber),
-          ],
+              Container(
+                color: Colors.amber,
+                height: 200,
+              ),
+            ],
+          ),
         ));
   }
 }
