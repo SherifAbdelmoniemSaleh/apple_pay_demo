@@ -42,6 +42,26 @@ class _MyHomePageState extends State<MyHomePage> {
     )
   ];
 
+  late final Pay _payClient;
+
+  @override
+  void initState() {
+// When you are ready to load your configuration
+    _payClient = Pay({
+      PayProvider.apple_pay: PaymentConfiguration.fromJsonString(
+          payment_configurations.defaultApplePay),
+    });
+
+    var res = _payClient
+        .userCanPay(PayProvider.apple_pay)
+        .then((value) => print(value));
+    print("----------------------------------------------------");
+    print(res.toString());
+    print("----------------------------------------------------");
+
+    super.initState();
+  }
+
   void onApplePayResult(paymentResult) {
     debugPrint(paymentResult.toString());
   }
@@ -50,8 +70,9 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('T-shirt Shop'),
+          title: const Text('Yalla tour Shop'),
         ),
+
         // backgroundColor: Colors.blue,
         body: Container(
           width: MediaQuery.of(context).size.width,
@@ -64,7 +85,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 color: Colors.green,
               ),
               Container(
-                height: 200,
                 color: Colors.red,
                 child: // Example pay button configured using a string
                     ApplePayButton(
