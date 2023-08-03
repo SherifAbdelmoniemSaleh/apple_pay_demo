@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pay/pay.dart';
-
-import 'payment_configurations.dart' as payment_configurations;
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(const MyApp());
@@ -34,41 +32,75 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final _paymentItems = [
-    const PaymentItem(
-      label: 'Total',
-      amount: '99.99',
-      status: PaymentItemStatus.final_price,
-    )
-  ];
+  String _deviceModel = "permission";
+  String _alarmModel = "ask alarm";
+  int _argsModel = 123;
 
-  late final Pay _payClient;
-  bool canPay = false;
-  bool payDone = false;
-
+  static const platformChannel = MethodChannel('com.gama.applePay/native');
   @override
   void initState() {
-    _payClient = Pay({
-      PayProvider.apple_pay: PaymentConfiguration.fromJsonString(
-          payment_configurations.defaultApplePay),
-    });
-
-    _payClient.userCanPay(PayProvider.apple_pay).then((value) => {
-          setState(() {
-            canPay = value;
-          })
-        });
-
     super.initState();
   }
 
-  void onApplePayResult(paymentResult) {
-    if (paymentResult != null) {
-      setState(() {
-        payDone = true;
-      });
+  Future getNativeCodeMethod() async {
+    String model;
+    try {
+      // 1
+      final String result = await platformChannel.invokeMethod('getNativeCode');
+
+      // 2
+      model = result;
+    } catch (e) {
+      // 3
+      model = "Can't fetch the method: '$e'.";
     }
-    debugPrint(paymentResult.toString());
+
+    // 4
+    setState(() {
+      _deviceModel = model;
+    });
+  }
+
+  Future getAlarmNativeCodeMethod() async {
+    String model;
+    try {
+      // 1
+      final String result =
+          await platformChannel.invokeMethod('getNativeAlarmCode');
+
+      // 2
+      model = result;
+    } catch (e) {
+      // 3
+      model = "Can't fetch the method: '$e'.";
+    }
+
+    // 4
+    setState(() {
+      _alarmModel = model;
+    });
+  }
+
+  Future getArgsNativeCodeMethod() async {
+    int model;
+    try {
+      // 1
+
+      final arguments = {"number": _argsModel};
+      final int result =
+          await platformChannel.invokeMethod('getNativeArgsCode', arguments);
+
+      // 2
+      model = result;
+    } catch (e) {
+      // 3
+      model = -1;
+    }
+
+    // 4
+    setState(() {
+      _argsModel = model;
+    });
   }
 
   @override
@@ -81,53 +113,27 @@ class _MyHomePageState extends State<MyHomePage> {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             child: Center(
-                child: canPay
-                    ? payDone
-                        ? Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                const Text(
-                                  " Payment completed successfully",
-                                  style: TextStyle(fontSize: 18),
-                                ),
-                                MaterialButton(
-                                  child: Container(
-                                      color: Colors.black,
-                                      child: const Padding(
-                                        padding: EdgeInsets.all(8.0),
-                                        child: Text("Reload payment",
-                                            style:
-                                                TextStyle(color: Colors.white)),
-                                      )),
-                                  onPressed: () {
-                                    setState(() {
-                                      payDone = false;
-                                    });
-                                  },
-                                ),
-                              ],
-                            ),
-                          )
-                        : ApplePayButton(
-                            paymentConfiguration:
-                                PaymentConfiguration.fromJsonString(
-                                    payment_configurations.defaultApplePay),
-                            paymentItems: _paymentItems,
-                            style: ApplePayButtonStyle.black,
-                            type: ApplePayButtonType.buy,
-                            margin: const EdgeInsets.all(15.0),
-                            height: 60,
-                            width: 300,
-                            onPaymentResult: onApplePayResult,
-                            loadingIndicator: const Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                          )
-                    : const Text(
-                        "User can not pay on this device due to \n * Unsupported region \n * No wallet \n * Other unknown reason from apple",
-                        style: TextStyle(fontSize: 18),
-                      ))));
+                child: Column(
+              children: [
+                MaterialButton(
+                    child: Container(
+                        color: Colors.amber, child: Text(_deviceModel)),
+                    onPressed: getNativeCodeMethod),
+                SizedBox(
+                  height: 80,
+                ),
+                MaterialButton(
+                    child: Container(
+                        color: Colors.amber, child: Text(_alarmModel)),
+                    onPressed: getAlarmNativeCodeMethod),
+                SizedBox(
+                  height: 80,
+                ),
+                MaterialButton(
+                    child: Container(
+                        color: Colors.amber, child: Text("$_argsModel")),
+                    onPressed: getArgsNativeCodeMethod),
+              ],
+            ))));
   }
 }
