@@ -1,16 +1,32 @@
 import UIKit
 import Flutter
 import UserNotifications
+import AVFoundation
+
 
 @UIApplicationMain
-@objc class AppDelegate: FlutterAppDelegate {
+@objc class AppDelegate: FlutterAppDelegate  {
+    
+    var audioPlayer: AVAudioPlayer?
+    
+    
+    
+//    var timer = Timer() //make a timer variable, but do do anything yet
+//       let timeInterval:TimeInterval = 10.0
+    
+
   override func application(
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
       
       
-      
+      do {
+                 try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: .mixWithOthers)
+                 try AVAudioSession.sharedInstance().setActive(true)
+             } catch {
+                 print("Failed to configure audio session: \(error)")
+             }
       // 1
              let controller : FlutterViewController = window?.rootViewController as! FlutterViewController
              
@@ -22,10 +38,43 @@ import UserNotifications
 
       
       
+//
+//      if let notification = launchOptions?[.localNotification] as? UILocalNotification {
+//          print("handleLocalNotification.")
+//
+//                handleLocalNotification(notification)
+//            }
+      
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
     
+    
+    
+//
+//    func handleLocalNotification(_ notification: UILocalNotification) {
+//           // Play the audio here
+//        playAudio()
+//       }
+//
+//
+//
+//    func playAudio() {
+//          guard let audioFileURL = Bundle.main.url(forResource: "elharam_azan_ali_ahmed_molla", withExtension: "mp3") else {
+//              print("Audio file not found.")
+//              return
+//          }
+//
+//          do {
+//              // Create the audio player and set the 2-minute duration
+//              audioPlayer = try AVAudioPlayer(contentsOf: audioFileURL)
+//              audioPlayer?.numberOfLoops = -1 // Play the audio indefinitely
+//              audioPlayer?.prepareToPlay()
+//              audioPlayer?.play()
+//          } catch {
+//              print("Error initializing audio player: \(error)")
+//          }
+//      }
     
     override   func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 didReceive response: UNNotificationResponse,
@@ -34,10 +83,16 @@ import UserNotifications
             // Handle the actions for the expired timer.
             if response.actionIdentifier == "SNOOZE_ACTION" {
                 // Invalidate the old timer and create a new one. . .
+                
+                
+                print("timer is snooze")
             }
             else if response.actionIdentifier == "STOP_ACTION" {
                 // Invalidate the timer. . .
+                print("timer is stop")
             }
+        }else {
+            print("timer is set")
         }
         
         // Else handle actions for other notification types. . .
@@ -48,7 +103,8 @@ import UserNotifications
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         // Update the app interface directly.
-        
+        print(" userNotificationCenter timer is play sound")
+
         // Play a sound.
         completionHandler(UNNotificationPresentationOptions.sound)
     }
@@ -82,9 +138,7 @@ import UserNotifications
            // 6
         self.receiveAlarm(result: result)
             }
-            
-            
-            
+
             if call.method == "getNativeArgsCode" {
                 guard let args = call.arguments as? [String : Int] else {return}
                 let localNum = args["number"]!
@@ -132,9 +186,7 @@ import UserNotifications
             result("All set!")
 
             }
-        
-        // 8
-        // result(deviceModel)
+
     }
     
     
@@ -142,59 +194,70 @@ import UserNotifications
         var localError = false
         
         
-        let content = UNMutableNotificationContent()
-        content.title = "notification"
-        content.subtitle = "It looks good"
-//        content.sound = UNNotificationSound.
-        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "elharam_azan_ali_ahmed_molla_ios.aiff"))
         
-        // show this notification five seconds from now
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
         
-        // choose a random identifier
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
         
-        // add our notification request
-        UNUserNotificationCenter.current().add(request){ (error) in
-            if error != nil {
-               // Handle any errors.
-                localError = true
-//                     result("error")
-            }
-         }
+        let timer = Timer.scheduledTimer(withTimeInterval: 300.0, repeats: false) { timer in
+            print("Timer fired!")
+        }
         
-//        // 7
-//        var localError = false
-//              let content = UNMutableNotificationContent()
-//              content.title = "Weekly Staff Meeting"
-//              content.body = "Every Tuesday at 2pm"
-//              // Configure the recurring date.
+        
+//        self.timer = Timer.scheduledTimer(timeInterval: self.timeInterval,
+//                   target: self,
+//                   selector: "timerDidEnd:",
+//                   userInfo: "Pizza Done!!",
+//                   repeats: false)
 //
-//              var dateComponents = DateComponents()
-//              dateComponents.calendar = Calendar.current
 //
-//              dateComponents.hour = 17    // 14:00 hours
-//              dateComponents.minute = 00
 //
-//              // Create the trigger as a repeating event.
-//              let trigger = UNCalendarNotificationTrigger(
-//                       dateMatching: dateComponents, repeats: true)
+//        let timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
+
+        
 //
-//              // Create the request
-//              let uuidString = UUID().uuidString
-//              let request = UNNotificationRequest(identifier: uuidString,
-//                          content: content, trigger: trigger)
+//        let content = UNMutableNotificationContent()
+//        content.title = "notification"
+//        content.subtitle = "It looks good"
+//        content.sound = UNNotificationSound.default
 //
-//              // Schedule the request with the system.
-//              let notificationCenter = UNUserNotificationCenter.current()
-//              notificationCenter.add(request) { (error) in
-//                 if error != nil {
-//                    // Handle any errors.
-//                     localError = true
-////                     result("error")
-//                 }
-//              }
-//        // 8
+////        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "elharam_azan_ali_ahmed_molla_ios.aiff"))
+//
+//        // show this notification five seconds from now
+//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+//
+//        // choose a random identifier
+//        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+//
+//        // add our notification request
+//        UNUserNotificationCenter.current().add(request){ (error) in
+////            if error != nil {
+////               // Handle any errors.
+////                localError = true
+//////                     result("error")
+////            }
+//
+//
+//            if let error = error {
+//                       print("Error scheduling Azan notification: \(error.localizedDescription)")
+//                localError = true
+//                   } else {
+//                       print("Azan notification scheduled successfully.")
+//                       // Start playing the audio after the notification is scheduled
+//
+////                       DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 5) {
+////                           self.playAudio()
+////                        }
+//
+//
+//                       self.timer = Timer.scheduledTimer(timeInterval: self.timeInterval,
+//                                  target: self,
+//                                  selector: "timerDidEnd:",
+//                                  userInfo: "Pizza Done!!",
+//                                  repeats: false)
+//
+//                   }
+//
+//         }
+        
         if localError {
             result("error")
 
@@ -216,5 +279,4 @@ import UserNotifications
     }
     
 }
-
 

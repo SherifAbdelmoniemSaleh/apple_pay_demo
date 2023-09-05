@@ -12,6 +12,11 @@
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
 		5D705C00D1A6B581E8ACFCEC /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9082BDA7F1C99631DB3C07AF /* Pods_Runner.framework */; };
 		74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74858FAE1ED2DC5600515810 /* AppDelegate.swift */; };
+		92BAD5F62A7FA223009773EF /* elharam_azan_ali_ahmed_molla.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 92BAD5F52A7FA223009773EF /* elharam_azan_ali_ahmed_molla.mp3 */; };
+		92BAD5FB2A7FAAEE009773EF /* 4.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 92BAD5F72A7FAAEE009773EF /* 4.aiff */; };
+		92BAD5FC2A7FAAEE009773EF /* 1.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 92BAD5F82A7FAAEE009773EF /* 1.aiff */; };
+		92BAD5FD2A7FAAEE009773EF /* 3.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 92BAD5F92A7FAAEE009773EF /* 3.aiff */; };
+		92BAD5FE2A7FAAEE009773EF /* 2.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 92BAD5FA2A7FAAEE009773EF /* 2.aiff */; };
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
@@ -54,6 +59,11 @@
 		9082BDA7F1C99631DB3C07AF /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		928BE87D2A70110A00B3C76E /* RunnerProfile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RunnerProfile.entitlements; sourceTree = "<group>"; };
 		928BE87E2A7011C400B3C76E /* Runner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Runner.entitlements; sourceTree = "<group>"; };
+		92BAD5F52A7FA223009773EF /* elharam_azan_ali_ahmed_molla.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = elharam_azan_ali_ahmed_molla.mp3; sourceTree = "<group>"; };
+		92BAD5F72A7FAAEE009773EF /* 4.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = 4.aiff; sourceTree = SOURCE_ROOT; };
+		92BAD5F82A7FAAEE009773EF /* 1.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = 1.aiff; sourceTree = SOURCE_ROOT; };
+		92BAD5F92A7FAAEE009773EF /* 3.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = 3.aiff; sourceTree = SOURCE_ROOT; };
+		92BAD5FA2A7FAAEE009773EF /* 2.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = 2.aiff; sourceTree = SOURCE_ROOT; };
 		9740EEB21CF90195004384FC /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = Flutter/Debug.xcconfig; sourceTree = "<group>"; };
 		9740EEB31CF90195004384FC /* Generated.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Generated.xcconfig; path = Flutter/Generated.xcconfig; sourceTree = "<group>"; };
 		97C146EE1CF9000F007C117D /* Runner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Runner.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,6 +136,11 @@
 		97C146F01CF9000F007C117D /* Runner */ = {
 			isa = PBXGroup;
 			children = (
+				92BAD5F82A7FAAEE009773EF /* 1.aiff */,
+				92BAD5FA2A7FAAEE009773EF /* 2.aiff */,
+				92BAD5F92A7FAAEE009773EF /* 3.aiff */,
+				92BAD5F72A7FAAEE009773EF /* 4.aiff */,
+				92BAD5F52A7FA223009773EF /* elharam_azan_ali_ahmed_molla.mp3 */,
 				928BE87E2A7011C400B3C76E /* Runner.entitlements */,
 				928BE87D2A70110A00B3C76E /* RunnerProfile.entitlements */,
 				97C146FA1CF9000F007C117D /* Main.storyboard */,
@@ -251,10 +266,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92BAD5F62A7FA223009773EF /* elharam_azan_ali_ahmed_molla.mp3 in Resources */,
 				97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */,
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
 				97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */,
+				92BAD5FB2A7FAAEE009773EF /* 4.aiff in Resources */,
+				92BAD5FD2A7FAAEE009773EF /* 3.aiff in Resources */,
+				92BAD5FC2A7FAAEE009773EF /* 1.aiff in Resources */,
 				97C146FC1CF9000F007C117D /* Main.storyboard in Resources */,
+				92BAD5FE2A7FAAEE009773EF /* 2.aiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

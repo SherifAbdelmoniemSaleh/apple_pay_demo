@@ -2,10 +2,22 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:elharam_azan_ali_ahmed_molla.mp3">
+      location = "group:elharam_azan_ali_ahmed_molla_ios.aiff">
    </FileRef>
    <FileRef
-      location = "group:elharam_azan_ali_ahmed_molla_ios.aiff">
+      location = "group:1.aiff">
+   </FileRef>
+   <FileRef
+      location = "group:2.aiff">
+   </FileRef>
+   <FileRef
+      location = "group:3.aiff">
+   </FileRef>
+   <FileRef
+      location = "group:4.aiff">
+   </FileRef>
+   <FileRef
+      location = "group:elharam_azan_ali_ahmed_molla.mp3">
    </FileRef>
    <FileRef
       location = "group:Runner.xcodeproj">
