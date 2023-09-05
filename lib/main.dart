@@ -119,7 +119,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Container(
                         color: Colors.amber, child: Text(_deviceModel)),
                     onPressed: getNativeCodeMethod),
-                SizedBox(
+                const SizedBox(
                   height: 80,
                 ),
                 MaterialButton(
